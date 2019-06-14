@@ -9,6 +9,7 @@ import { GameViewComponent } from './components/game-view/game-view.component';
 import { CardViewComponent } from './components/card-view/card-view.component';
 import { SuitRankViewComponent } from './components/suit-rank-view/suit-rank-view.component';
 import { ScoreViewComponent } from './components/score-view/score-view.component';
+import { StartComponent } from './components/start/start.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { ScoreViewComponent } from './components/score-view/score-view.component
     GameViewComponent,
     CardViewComponent,
     SuitRankViewComponent,
-    ScoreViewComponent
+    ScoreViewComponent,
+    StartComponent
   ],
   imports: [
     BrowserModule,

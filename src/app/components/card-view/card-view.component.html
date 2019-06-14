@@ -1,12 +1,16 @@
 <div class="col-3 m-3">
   <div class="row">
-    <div class="col-12">
+    <div class="col-sm-12 justify-content-start">
       <app-suit-rank-view [suit]="suit" [rank]="rank"></app-suit-rank-view>
     </div>
-    <div class="col-12">
+  </div>
+  <div class="row">
+    <div class="col-sm-12 justify-content-center">
       <img [src]="suitUri" alt={{suit}} width="75" height="75" />
     </div>
-    <div class="col-12">
+  </div>
+  <div class="row justify-content-end">
+    <div class="col-sm-12 justify-content-start">
       <app-suit-rank-view [suit]="suit" [rank]="rank" [reverse]="bottonSuitView"></app-suit-rank-view>
     </div>
   </div>
