@@ -1,11 +1,17 @@
 <div class="row justify-content-center mt-5">
   <div class="col-sm-4">
-    <form>
+    <form class="form" [formGroup]="playerForm" novalidate>
       <div class="form-group">
-        <input id="playerName" name="playerName" class="form-control-lg" type="text" placeholder="Enter Your Name"
+        <input formControlName="playerName" class="form-control-lg" type="text" placeholder="Enter Your Name"
           required />
+        <div *ngIf="playerForm.controls['playerName'].errors.required" class="text-danger">
+          Name is required.
+        </div>
       </div>
-      <div class="form-group"><button class="btn btn-success btn-lg" (click)="startGame()">Start</button></div>
+      <div class="form-group">
+        <button [disabled]="playerForm.pristine || playerForm.invalid" class="btn btn-success btn-lg"
+          (click)="startGame()">Start</button>
+      </div>
     </form>
   </div>
 </div>
