@@ -7,12 +7,17 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class CardViewComponent implements OnInit {
 
+  suitUri: string;
   @Input() suit: string;
-  @Input() cardValue: number;
+  @Input() rank: number;
+  bottonSuitView = true;
 
-  constructor() { }
+  constructor() {
+
+  }
 
   ngOnInit() {
+    this.suitUri = '/assets/images/' + this.suit + '.png';
   }
 
 }

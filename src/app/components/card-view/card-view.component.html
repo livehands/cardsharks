@@ -1,15 +1,13 @@
-<div class="row">
-  <div class="col-offset-9 col-3">
-    <img src="[suit]" />
-  </div>
-</div>
-<div class="row">
-  <div class="col-offset-3 col-6">
-    <div class="text-danger">{{cardValue}}</div>
-  </div>
-</div>
-<div class="row">
-  <div class="col-offset-9 col-3">
-    <img src="[suit]" />
+<div class="col-3 m-3">
+  <div class="row">
+    <div class="col-12">
+      <app-suit-rank-view [suit]="suit" [rank]="rank"></app-suit-rank-view>
+    </div>
+    <div class="col-12">
+      <img [src]="suitUri" alt={{suit}} width="75" height="75" />
+    </div>
+    <div class="col-12">
+      <app-suit-rank-view [suit]="suit" [rank]="rank" [reverse]="bottonSuitView"></app-suit-rank-view>
+    </div>
   </div>
 </div>
