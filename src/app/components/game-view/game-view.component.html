@@ -4,7 +4,7 @@
   </div>
   <div class="col-sm-4">&nbsp;</div>
   <div class="col-sm-4">
-    <h3 class="text-danger">High Score: {{highScore}}</h3>
+    <h3 class="text-danger">High Score: {{player?.highscore}}</h3>
   </div>
 </div>
 <div class="row border border-secondary">
@@ -17,8 +17,12 @@
     </div>
   </div>
 </div>
-<div class="row d-flex flex-row justify-content-center mt-4">
-  <button class="btn btn-lg btn-primary mr-2">Higher</button>
-  <button class="btn btn-lg btn-danger mr-2">Lower</button>
-  <button class="btn btn-lg btn-warning mr-2">Swap Card</button>
+<div *ngIf="!gameOver" class="row d-flex flex-row justify-content-center mt-4">
+  <button class="btn btn-lg btn-primary mr-2" (click)="checkGame('h');">Higher</button>
+  <button class="btn btn-lg btn-danger mr-2" (click)="checkGame('l');">Lower</button>
+  <button class="btn btn-lg btn-warning mr-2" (click)="checkGame('s');">Swap Card</button>
+</div>
+<div *ngIf="gameOver" class="row d-flex flex-row justify-content-center mt-4">
+  <button class="btn btn-lg btn-danger mr-2" (click)="quitGame()">Quit</button>
+  <button class="btn btn-lg btn-success mr-2" (click)="newGame()">New Game</button>
 </div>
