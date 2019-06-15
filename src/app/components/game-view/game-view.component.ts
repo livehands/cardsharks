@@ -12,6 +12,9 @@ import { ThrowStmt } from '@angular/compiler';
 })
 export class GameViewComponent implements OnInit {
 
+  highScoreKey = 'highScore';
+  playerKey = 'player';
+
   currentCard: CardModel;
   player: PlayerModel;
   highScore: number;
@@ -27,8 +30,14 @@ export class GameViewComponent implements OnInit {
 
   ngOnInit() {
     this.score = 0;
-    this.player = JSON.parse(localStorage.getItem('player'));
-    this.highScore = JSON.parse(localStorage.getItem('highScore'));
+    this.player = JSON.parse(localStorage.getItem(this.playerKey));
+    const hs = JSON.parse(localStorage.getItem(this.highScoreKey));
+    if (hs) {
+      this.highScore = hs;
+    } else {
+      this.highScore = 0;
+    }
+
     this.deck = new DeckModel().shuffle();
     this.currentCard = this.deck[0];
     this.board = [];
@@ -40,7 +49,7 @@ export class GameViewComponent implements OnInit {
   checkGame(guess: string) {
     this.deckCount++;
     const nextCard = this.deck[this.deckCount];
-    console.log('Deck Count: ' + this.deckCount);
+
     switch (guess) {
       case 'l':
         this.board.push(nextCard);
@@ -71,7 +80,6 @@ export class GameViewComponent implements OnInit {
     // Increase the number of cards drawn and get the latest card
     this.deckCount++;
     const newCard = this.deck[this.deckCount];
-    console.log('Deck Count: ' + this.deckCount);
 
     // Remove card from board and replace with the new card.
     this.board.pop();
@@ -94,18 +102,18 @@ export class GameViewComponent implements OnInit {
   }
 
   quitGame() {
-    localStorage.removeItem('player');
+    localStorage.removeItem(this.playerKey);
     this.router.navigate(['/start']);
   }
 
   recordScore() {
-    const hs: number = JSON.parse(localStorage.getItem('highscore'));
+    const hs: number = JSON.parse(localStorage.getItem(this.highScoreKey));
 
-    if (hs <= this.score) {
-      this.highScore = hs;
-      this.player.highscore = hs;
-      localStorage.setItem('highscore', JSON.stringify(this.score));
-      localStorage.setItem('player', JSON.stringify(this.player));
+    if ((!hs) || (hs <= this.score)) {
+      this.highScore = this.score;
+      this.player.highscore = this.score;
+      localStorage.setItem(this.highScoreKey, JSON.stringify(this.score));
+      localStorage.setItem(this.playerKey, JSON.stringify(this.player));
     }
   }
   newGame() {
