@@ -21,6 +21,7 @@ export class GameViewComponent implements OnInit {
   board: CardModel[];
   swapCount = 1;
   status: string;
+  deckCount: number; // how many cards drawn...needed for swap...
 
   constructor(private router: Router) { }
 
@@ -33,11 +34,13 @@ export class GameViewComponent implements OnInit {
     this.board = [];
     this.board.push(this.currentCard);
     this.gameOver = false;
+    this.deckCount = 0;
   }
 
   checkGame(guess: string) {
-    const nextCard = this.deck[this.board.length];
-
+    this.deckCount++;
+    const nextCard = this.deck[this.deckCount];
+    console.log('Deck Count: ' + this.deckCount);
     switch (guess) {
       case 'l':
         this.board.push(nextCard);
@@ -65,8 +68,12 @@ export class GameViewComponent implements OnInit {
   }
 
   swapCard() {
-    const newCard = this.deck[this.board.length];
-    console.log('New Card: ' + JSON.stringify(newCard));
+    // Increase the number of cards drawn and get the latest card
+    this.deckCount++;
+    const newCard = this.deck[this.deckCount];
+    console.log('Deck Count: ' + this.deckCount);
+
+    // Remove card from board and replace with the new card.
     this.board.pop();
     this.currentCard = newCard;
     this.board.push(newCard);
@@ -75,6 +82,7 @@ export class GameViewComponent implements OnInit {
   }
   wrong() {
     this.gameOver = true;
+    this.recordScore();
     this.status = 'GAME OVER';
   }
 
@@ -105,10 +113,11 @@ export class GameViewComponent implements OnInit {
 
     this.score = 0;
     this.swapCount = 1;
+    this.deckCount = 0;
     this.gameOver = false;
     this.deck = new DeckModel().shuffle();
     this.board = [];
-    this.currentCard = this.deck[0];
+    this.currentCard = this.deck[this.deckCount];
     this.board.push(this.currentCard);
   }
 
