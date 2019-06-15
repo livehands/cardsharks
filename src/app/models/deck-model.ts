@@ -3,7 +3,7 @@ import { CardModel } from './card.model';
 export class DeckModel {
 
   suits = ['clubs', 'spades', 'hearts', 'diamonds'];
-  ranks = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'];
+  ranks = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'];
   deck: CardModel[];
 
   constructor() {
@@ -24,29 +24,19 @@ export class DeckModel {
   }
 
   shuffle(): CardModel[] {
-
     let d: CardModel[] = this.initDeck();
-    console.log('deck: ' + d.length + ' ' + JSON.stringify(d));
 
     const shuffledDeck = [];
     let key;
-    let card: CardModel;
-    const completedDeck = [];
 
     while (shuffledDeck.length < 52) {
-      key = Math.floor((Math.random() * 52));
+      key = Math.floor((Math.random() * d.length));
+      console.log('key' + key + ': ' + key);
       shuffledDeck.push(d[key]);
-
-      if (!shuffledDeck[key]) {
-        card = this.deck[key];
-        shuffledDeck[key] = card;
-      }
+      d.splice(key);
     }
 
-    shuffledDeck.forEach(c => {
-      completedDeck.push(c);
-    });
     console.log('Shuffle: ' + shuffledDeck.length + ' ' + JSON.stringify(shuffledDeck));
-    return completedDeck;
+    return shuffledDeck;
   }
 }
