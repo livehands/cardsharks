@@ -1,8 +1,10 @@
 <div class="row">
   <div class="col-sm-4">
-    <h3 class="text-primary">Player: {{player?.name}}</h3>
+    <h3 class="text-primary">Player: <span class="text-uppercase">{{player?.name}}</span></h3>
   </div>
-  <div class="col-sm-4">&nbsp;</div>
+  <div class="col-sm-4">
+    <h3 class="text-success">Score: {{score}}</h3>
+  </div>
   <div class="col-sm-4">
     <h3 class="text-danger">High Score: {{player?.highscore}}</h3>
   </div>
@@ -10,19 +12,21 @@
 <div class="row border border-secondary">
   <div class="col-sm-12">
     <div class="row">
-      <app-card-view [suit]="currentCard.suit" [rank]="currentCard.rank"></app-card-view>
-      <app-card-view [suit]="currentCard.suit" [rank]="currentCard.rank"></app-card-view>
-      <app-card-view [suit]="currentCard.suit" [rank]="currentCard.rank"></app-card-view>
-      <app-card-view [suit]="currentCard.suit" [rank]="currentCard.rank"></app-card-view>
+      <div *ngFor="let c of board">
+        <app-card-view [suit]="c.suit" [rank]="c.rank"></app-card-view>
+      </div>
     </div>
   </div>
 </div>
 <div *ngIf="!gameOver" class="row d-flex flex-row justify-content-center mt-4">
   <button class="btn btn-lg btn-primary mr-2" (click)="checkGame('h');">Higher</button>
   <button class="btn btn-lg btn-danger mr-2" (click)="checkGame('l');">Lower</button>
-  <button class="btn btn-lg btn-warning mr-2" (click)="checkGame('s');">Swap Card</button>
+  <button *ngIf="swapCount > 0" class="btn btn-lg btn-warning mr-2" (click)="checkGame('s');">Swap Card</button>
 </div>
 <div *ngIf="gameOver" class="row d-flex flex-row justify-content-center mt-4">
   <button class="btn btn-lg btn-danger mr-2" (click)="quitGame()">Quit</button>
   <button class="btn btn-lg btn-success mr-2" (click)="newGame()">New Game</button>
+</div>
+<div class="row d-flex flex-row justify-content-center">
+  <h5 class="mt-4">{{status}}</h5>
 </div>

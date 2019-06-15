@@ -25,13 +25,18 @@ export class DeckModel {
 
   shuffle(): CardModel[] {
 
+    let d: CardModel[] = this.initDeck();
+    console.log('deck: ' + d.length + ' ' + JSON.stringify(d));
+
     const shuffledDeck = [];
-    let card: CardModel;
     let key;
+    let card: CardModel;
     const completedDeck = [];
 
     while (shuffledDeck.length < 52) {
-      key = Math.floor((Math.random() * 52) + 1);
+      key = Math.floor((Math.random() * 52));
+      shuffledDeck.push(d[key]);
+
       if (!shuffledDeck[key]) {
         card = this.deck[key];
         shuffledDeck[key] = card;
@@ -41,7 +46,7 @@ export class DeckModel {
     shuffledDeck.forEach(c => {
       completedDeck.push(c);
     });
-
+    console.log('Shuffle: ' + shuffledDeck.length + ' ' + JSON.stringify(shuffledDeck));
     return completedDeck;
   }
 }
