@@ -50,6 +50,7 @@ export class GameViewComponent implements OnInit {
   checkGame(guess: string) {
     this.deckCount++;
     const nextCard = this.deck[this.deckCount];
+    this.swapped = false;
 
     switch (guess) {
       case 'l':
