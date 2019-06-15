@@ -25,22 +25,22 @@ export class DeckModel {
 
   shuffle(): CardModel[] {
     let d = this.deck;
-    console.log('original Deck: ' + JSON.stringify(d));
+    // console.log('original Deck: ' + JSON.stringify(d));
     const shuffledDeck = [];
     let key;
-    console.log(JSON.stringify(d));
+    // console.log(JSON.stringify(d));
 
     while (shuffledDeck.length < 52) {
       key = Math.floor((Math.random() * d.length) + 1);
-      key--;
-      console.log('key' + key + ': ' + key);
+      key--; // get back to zero based count as random on;y does betweek 1 and d.length.
+      // console.log('key' + key + ': ' + key);
       shuffledDeck.push(d[key]);
       d.splice(key, 1);
-      console.log(JSON.stringify(d));
-      console.log('Dlength' + d.length);
+      // console.log(JSON.stringify(d));
+      // console.log('Dlength' + d.length);
     }
 
-    console.log('Shuffle: ' + shuffledDeck.length + ' ' + JSON.stringify(shuffledDeck));
+    // console.log('Shuffle: ' + shuffledDeck.length + ' ' + JSON.stringify(shuffledDeck));
     return shuffledDeck;
   }
 }

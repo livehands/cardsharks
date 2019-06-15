@@ -38,11 +38,6 @@ export class GameViewComponent implements OnInit {
   checkGame(guess: string) {
     const nextCard = this.deck[this.board.length];
 
-    console.log('Guess: ' + guess);
-    console.log('Current: ' + JSON.stringify(this.currentCard));
-    console.log('Next: ' + JSON.stringify(nextCard));
-    console.log('cc: ' + this.currentCard.value + ' nc: ' + nextCard.value);
-
     switch (guess) {
       case 'l':
         this.board.push(nextCard);
@@ -61,21 +56,23 @@ export class GameViewComponent implements OnInit {
           this.wrong();
         }
         break;
-      case 's':
-        this.currentCard = nextCard;
-        this.board.pop();
-        this.board.push(nextCard);
-        this.swapCount--;
-        this.gameOver = false;
-        break;
       default:
-        console.log('nothing...');
+        this.wrong();
         break;
     }
 
     this.recordScore();
   }
 
+  swapCard() {
+    const newCard = this.deck[this.board.length];
+    console.log('New Card: ' + JSON.stringify(newCard));
+    this.board.pop();
+    this.currentCard = newCard;
+    this.board.push(newCard);
+    this.swapCount--;
+    this.gameOver = false;
+  }
   wrong() {
     this.gameOver = true;
     this.status = 'GAME OVER';
@@ -113,7 +110,6 @@ export class GameViewComponent implements OnInit {
     this.board = [];
     this.currentCard = this.deck[0];
     this.board.push(this.currentCard);
-    console.log(this.deck.length + ' ' + JSON.stringify(this.deck));
   }
 
 }

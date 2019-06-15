@@ -19,13 +19,17 @@
   </div>
 </div>
 <div *ngIf="!gameOver" class="row d-flex flex-row justify-content-center mt-4">
-  <button class="btn btn-lg btn-primary mr-2" (click)="checkGame('h');">Higher</button>
-  <button class="btn btn-lg btn-danger mr-2" (click)="checkGame('l');">Lower</button>
-  <button *ngIf="swapCount > 0" class="btn btn-lg btn-warning mr-2" (click)="checkGame('s');">Swap Card</button>
+  <button class="btn btn-lg btn-primary mr-2" (click)="checkGame('h');"><i class="fa fa-long-arrow-alt-up"></i>
+    Higher</button>
+  <button class="btn btn-lg btn-danger mr-2" (click)="checkGame('l');"> <i class="fa fa-long-arrow-alt-down"></i>
+    Lower</button>
+  <button *ngIf="swapCount > 0" class="btn btn-lg btn-warning mr-2" (click)="swapCard()"><i
+      class="fa fa-sign-in-alt"></i>
+    Swap</button>
 </div>
 <div *ngIf="gameOver" class="row d-flex flex-row justify-content-center mt-4">
-  <button class="btn btn-lg btn-danger mr-2" (click)="quitGame()">Quit</button>
-  <button class="btn btn-lg btn-success mr-2" (click)="newGame()">New Game</button>
+  <button class="btn btn-lg btn-danger mr-2" (click)="quitGame()"><i class="fa fa-reply-all"></i> Quit</button>
+  <button class="btn btn-lg btn-success mr-2" (click)="newGame()"><i class="fa fa-plus-square"></i> New Game</button>
 </div>
 <div class="row d-flex flex-row justify-content-center">
   <h5 class="mt-4">{{status}}</h5>
