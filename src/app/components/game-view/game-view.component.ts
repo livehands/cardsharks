@@ -3,7 +3,6 @@ import { CardModel } from 'src/app/models/card.model';
 import { PlayerModel } from 'src/app/models/player.model';
 import { Router } from '@angular/router';
 import { DeckModel } from 'src/app/models/deck-model';
-import { ThrowStmt } from '@angular/compiler';
 
 @Component({
   selector: 'app-game-view',
@@ -25,6 +24,8 @@ export class GameViewComponent implements OnInit {
   swapCount = 1;
   status: string;
   deckCount: number; // how many cards drawn...needed for swap...
+  correctAnswer = false;
+  swapped = false;
 
   constructor(private router: Router) { }
 
@@ -80,6 +81,7 @@ export class GameViewComponent implements OnInit {
     // Increase the number of cards drawn and get the latest card
     this.deckCount++;
     const newCard = this.deck[this.deckCount];
+    const oldCard = this.currentCard;
 
     // Remove card from board and replace with the new card.
     this.board.pop();
@@ -87,9 +89,14 @@ export class GameViewComponent implements OnInit {
     this.board.push(newCard);
     this.swapCount--;
     this.gameOver = false;
+    this.correctAnswer = false;
+    this.swapped = true;
+    this.status = oldCard.rank + ' of ' + oldCard.suit + ' SWAPPED for ' + newCard.rank + ' of ' + newCard.suit;
   }
+
   wrong() {
     this.gameOver = true;
+    this.correctAnswer = false;
     this.recordScore();
     this.status = 'GAME OVER';
   }
@@ -98,6 +105,7 @@ export class GameViewComponent implements OnInit {
     this.score++;
     this.gameOver = false;
     this.status = 'Correct!!';
+    this.correctAnswer = true;
     this.currentCard = nc;
   }
 
@@ -122,6 +130,8 @@ export class GameViewComponent implements OnInit {
     this.score = 0;
     this.swapCount = 1;
     this.deckCount = 0;
+    this.correctAnswer = false;
+    this.swapped = false;
     this.gameOver = false;
     this.deck = new DeckModel().shuffle();
     this.board = [];
